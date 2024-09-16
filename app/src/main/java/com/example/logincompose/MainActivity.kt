@@ -20,31 +20,32 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LoginComposeTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                    .padding(vertical = 30.dp, horizontal = 20.dp),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            LoginForm()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        color = MaterialTheme.colorScheme.tertiary
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
+fun Screen(content: @Composable () -> Unit) {
     LoginComposeTheme {
-        Greeting("Android")
+        Surface(
+            modifier = Modifier.fillMaxSize()
+                .padding(vertical = 30.dp, horizontal = 20.dp),
+            color = MaterialTheme.colorScheme.background,
+            content = content
+        )
     }
 }
+
+@Preview
+@Composable
+fun LoginForm() {
+    Screen {
+        Text(text = "Login")
+    }
+}
+
+
+
+
+
