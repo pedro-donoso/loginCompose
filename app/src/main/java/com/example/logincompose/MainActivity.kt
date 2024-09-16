@@ -45,31 +45,29 @@ fun LoginForm() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
         ) {
-            UserField()
-            PasswordField()
+            var user by remember { mutableStateOf("")}
+            var pass by remember { mutableStateOf("")}
+            UserField(value = user, onValueChange = { user = it})
+            PasswordField(value = pass, onValueChange = { pass = it})
             LoginButton()
         }
     }
 }
 
 @Composable
-fun UserField() {
-    var user by remember { mutableStateOf("")}
-
+fun UserField(value: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
-        value = user,
-        onValueChange = { user = it },
+        value = value,
+        onValueChange = onValueChange,
         label = { Text(text = "User") }
     )
 }
 
 @Composable
-fun PasswordField() {
-    var pass by remember { mutableStateOf("")}
-
+fun PasswordField(value: String, onValueChange: (String) -> Unit) {
     OutlinedTextField(
-        value = pass,
-        onValueChange = { pass = it },
+        value = value,
+        onValueChange = onValueChange,
         label = { Text(text = "Password") }
     )
 }
