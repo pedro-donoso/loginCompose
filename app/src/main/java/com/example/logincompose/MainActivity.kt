@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,21 +41,36 @@ fun LoginForm() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
         ) {
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = { Text(text = "User") }
-            )
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = { Text(text = "Password") }
-            )
-            Button(onClick = {}) {
-                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null )
-                Text(text = "Login")
-            }
+            UserField()
+            PasswordField()
+            LoginButton()
         }
+    }
+}
+
+@Composable
+fun UserField() {
+    OutlinedTextField(
+        value = "",
+        onValueChange = {},
+        label = { Text(text = "User") }
+    )
+}
+
+@Composable
+fun PasswordField() {
+    OutlinedTextField(
+        value = "",
+        onValueChange = {},
+        label = { Text(text = "Password") }
+    )
+}
+
+@Composable
+fun LoginButton() {
+    Button(onClick = {}) {
+        Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+        Text(text = "Login")
     }
 }
 
