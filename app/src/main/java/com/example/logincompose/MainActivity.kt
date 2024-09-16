@@ -30,6 +30,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.logincompose.ui.theme.LoginComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,7 +40,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LoginForm()
+            val navController = rememberNavController()
+            NavHost(navController, startDestination = "login") {
+                composable("login") {
+                    LoginForm()
+                }
+            }
         }
     }
 }
