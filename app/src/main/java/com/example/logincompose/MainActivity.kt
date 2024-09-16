@@ -44,7 +44,12 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(navController, startDestination = "login") {
                 composable("login") {
-                    LoginForm()
+                    LoginForm(onLogin = {
+                        navController.navigate("main")
+                    })
+                }
+                composable("main") {
+                    Main()
                 }
             }
         }
@@ -66,9 +71,8 @@ fun Main(){
     }
 }
 
-@Preview
 @Composable
-fun LoginForm() {
+fun LoginForm(onLogin: () -> Unit) {
     Screen {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,7 +84,7 @@ fun LoginForm() {
 
             UserField(value = user, onValueChange = { user = it})
             PasswordField(value = pass, onValueChange = { pass = it})
-            LoginButton(buttonEnable)
+            LoginButton(buttonEnable, onLogin)
         }
     }
 }
@@ -113,9 +117,9 @@ fun PasswordField(value: String, onValueChange: (String) -> Unit) {
 }
 
 @Composable
-fun LoginButton(enable: Boolean) {
+fun LoginButton(enable: Boolean, onLogin: () -> Unit) {
     Button(
-        onClick = {},
+        onClick = onLogin,
         enabled = enable
     ) {
         Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
