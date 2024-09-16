@@ -47,9 +47,11 @@ fun LoginForm() {
         ) {
             var user by remember { mutableStateOf("")}
             var pass by remember { mutableStateOf("")}
+            val buttonEnable = user.isNotEmpty() && pass.isNotEmpty()
+
             UserField(value = user, onValueChange = { user = it})
             PasswordField(value = pass, onValueChange = { pass = it})
-            LoginButton()
+            LoginButton(buttonEnable)
         }
     }
 }
@@ -73,8 +75,11 @@ fun PasswordField(value: String, onValueChange: (String) -> Unit) {
 }
 
 @Composable
-fun LoginButton() {
-    Button(onClick = {}) {
+fun LoginButton(enable: Boolean) {
+    Button(
+        onClick = {},
+        enabled = enable
+    ) {
         Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
         Text(text = "Login")
     }
