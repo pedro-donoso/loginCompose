@@ -17,6 +17,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,18 +54,22 @@ fun LoginForm() {
 
 @Composable
 fun UserField() {
+    var user by remember { mutableStateOf("")}
+
     OutlinedTextField(
-        value = "",
-        onValueChange = {},
+        value = user,
+        onValueChange = { user = it },
         label = { Text(text = "User") }
     )
 }
 
 @Composable
 fun PasswordField() {
+    var pass by remember { mutableStateOf("")}
+
     OutlinedTextField(
-        value = "",
-        onValueChange = {},
+        value = pass,
+        onValueChange = { pass = it },
         label = { Text(text = "Password") }
     )
 }
