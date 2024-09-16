@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -26,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.logincompose.ui.theme.LoginComposeTheme
@@ -70,14 +72,17 @@ fun UserField(value: String, onValueChange: (String) -> Unit) {
 
 @Composable
 fun PasswordField(value: String, onValueChange: (String) -> Unit) {
+    var passVisible by remember { mutableStateOf(false) }
+
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(text = "Password") },
-        visualTransformation = PasswordVisualTransformation(),
+        visualTransformation = if(passVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
-            IconToggleButton(checked = false, onCheckedChange = {}) {
-                Icon(imageVector = Icons.Default.Lock, contentDescription = null)
+            IconToggleButton(checked = passVisible, onCheckedChange = { passVisible = it }) {
+                val icon = if(passVisible) Icons.Default.Lock else Icons.Default.Done
+                Icon(imageVector = icon, contentDescription = null)
             }
         }
     )
